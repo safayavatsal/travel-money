@@ -2,8 +2,8 @@
 
 ## 1. Backend Configuration
 ### 1.1 Clone the Repository: 
-`git clone https://github.com/UnpredictablePrashant/TravelMemory.git
-cd TravelMemory`
+`git clone https://github.com/UnpredictablePrashant/TravelMemory.git`
+`cd TravelMemory`
 
 ### 1.2 Set Up Backend: Navigate to the backend directory: 
 `cd backend`
@@ -13,14 +13,14 @@ Install dependencies:
 
 ### 1.3 Configure Backend: Create or update the `.env` file with the necessary configurations. For example: 
 
-`DATABASE_URL=mongodb://your_mongo_db_url 
-PORT=3000`
+`DATABASE_URL=mongodb://your_mongo_db_url`
+`PORT=3000`
 
 ### 1.4 Set Up Reverse Proxy with Nginx:
 
 Install nginx:
-`sudo apt update
-sudo apt install nginx`
+`sudo apt update`
+`sudo apt install nginx`
 
 Configure nginx: Create a configuration file for your backend:
 
@@ -44,9 +44,9 @@ server {
 
 Enable the configuration and restart nginx:
 
-`sudo ln -s /etc/nginx/sites-available/travelmemory /etc/nginx/sites-enabled/
-sudo nginx -t
-sudo systemctl restart nginx`
+`sudo ln -s /etc/nginx/sites-available/travelmemory /etc/nginx/sites-enabled/`
+`sudo nginx -t`
+`sudo systemctl restart nginx`
 
 ## 2. Frontend and Backend Connection
 ### 2.1 Update Frontend Configuration: Navigate to the frontend directory:
@@ -56,8 +56,8 @@ Edit urls.js to point to your backend:
 `const BACKEND_URL = 'http://your_domain_or_IP:3000';`
 
 ### 2.2 Build and Deploy Frontend: Install frontend dependencies and build the React application:
-`npm install
-npm run build`
+`npm install`
+`npm run build`
 
 ### 2.3 Serve Frontend: Move the build files to a directory served by nginx. First, create a new directory for serving static files:
 `sudo mkdir -p /var/www/html/travelmemory`
@@ -84,9 +84,9 @@ server {
 }
 
 Enable the configuration and restart nginx:
-`sudo ln -s /etc/nginx/sites-available/travelmemory-frontend /etc/nginx/sites-enabled/
-sudo nginx -t
-sudo systemctl restart nginx`
+`sudo ln -s /etc/nginx/sites-available/travelmemory-frontend /etc/nginx/sites-enabled/`
+`sudo nginx -t`
+`sudo systemctl restart nginx`
 
 ## 3. Scaling the Application
 ### 3.1 Create Multiple Instances:
@@ -124,7 +124,7 @@ sudo systemctl restart nginx`
 - Include screenshots where relevant (e.g., EC2 instance setup, load balancer configuration, DNS records in Cloudflare).
 
 ### 5.2 Create Deployment Architecture Diagram:
-- Use draw.io to create a diagram.
+- Use `draw.io` to create a diagram.
   - Illustrate EC2 instances (frontend and backend)
   - Show the load balancer
   - Indicate Cloudflare setup and DNS records
