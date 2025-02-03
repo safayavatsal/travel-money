@@ -1,0 +1,51 @@
+name: Trivy Security Scan for OpenMetadata
+
+on:
+  pull_request_target:
+    types: [labeled, opened, synchronize, reopened]
+    paths:
+      - '**'
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  trivy-scan:
+    name: Run Trivy Security Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Run Trivy Image Scan
+      - name: Run Trivy Scan
+        id: trivy_scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: "fs"  # File system scan for source code
+          ignore-unfixed: true
+          severity: "HIGH,CRITICAL"
+          output: "trivy-results.txt"
+
+      # Step 3: Format Trivy Results
+      - name: Format Trivy Output
+        run: |
+          echo "## 🚨 Trivy Security Scan Results 🚨" > trivy-results.md
+          echo "" >> trivy-results.md
+          if [[ -s trivy-results.txt ]]; then
+            echo "### 🔴 Found HIGH and CRITICAL vulnerabilities:" >> trivy-results.md
+            echo '```' >> trivy-results.md
+            cat trivy-results.txt >> trivy-results.md
+            echo '```' >> trivy-results.md
+          else
+            echo "✅ No HIGH or CRITICAL vulnerabilities found." >> trivy-results.md
+          fi
+
+      # Step 4: Post Results as PR Comment
+      - name: Comment Trivy Scan Results on PR
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          path: trivy-results.md
