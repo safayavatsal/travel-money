@@ -1,4 +1,4 @@
-# travel-money
+# Travel-Money
 
 ## 1. Backend Configuration
 ### 1.1 Clone the Repository: 
